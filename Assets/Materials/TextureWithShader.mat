@@ -63,7 +63,7 @@ Material:
     m_Floats:
     - _Alpha: 0.405
     - _BumpScale: 1
-    - _Cutoff: 0.028
+    - _Cutoff: 0.244
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _Glossiness: 0.5
@@ -75,7 +75,7 @@ Material:
     - _Parallax: 0.02
     - _SecondaryAlpha: 0.437
     - _SrcBlend: 1
-    - _Stroke: 0.175
+    - _Stroke: 0.323
     - _TertiaryAlpha: 0.334
     - _UVSec: 0
     - _ZWrite: 1

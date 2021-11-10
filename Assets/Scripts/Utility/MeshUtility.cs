@@ -22,7 +22,7 @@ namespace BlueNoah
             return go;
         }
 
-        public static GameObject CreateTilePlane(Texture2D texture2D)
+        public static GameObject CreateTilePlane(Texture2D texture2D,int pixelPerUnit, out int xCount , out int yCount)
         {
             Shader meshShader = Shader.Find("UnlitShader");
             var meshMaterial = new Material(meshShader);
@@ -33,10 +33,9 @@ namespace BlueNoah
             List<int> triangles = new List<int>();
             List<Vector2> uvs = new List<Vector2>();
             List<Color> colors = new List<Color>();
-            float scale = 0.1f;
-            int pixelPerUnit = 10;
-            int xCount = texture2D.width / pixelPerUnit;
-            int yCount = texture2D.height / pixelPerUnit;
+            float scale = pixelPerUnit / 100f;
+            xCount = texture2D.width / pixelPerUnit;
+            yCount = texture2D.height / pixelPerUnit;
             float uvXPerUnit = (float)pixelPerUnit / texture2D.width;
             float uvYPerUnit = (float)pixelPerUnit / texture2D.height;
 
