@@ -45,6 +45,7 @@ namespace BlueNoah
                     transforms[index].position = vertic + center.position;
                 }
             }
+            float frequency = 3;
             //Ìí¼ÓDistanceJoint2D
             for (int i = 0; i < yCount; i++)
             {
@@ -52,41 +53,62 @@ namespace BlueNoah
                 {
                     var index = i * xCount + j;
                     var trans = transforms[index];
-                    if (i ==0 )
+                    //if (i ==0 )
                     {
-                        trans.GetComponent<Rigidbody2D>().gravityScale = 1;
+                        //trans.GetComponent<Rigidbody2D>().gravityScale = 1;
                     }
                     if (i < yCount - 1)
                     {
-                       var distance2D = trans.gameObject.AddComponent<SpringJoint2D>();
-                       distance2D.autoConfigureDistance = false;
-                       distance2D.connectedBody = transforms[(i + 1) * xCount + j].GetComponent<Rigidbody2D>();
-                       distance2D.dampingRatio = dampingRatio;
-                       distance2D.distance = size / 100f ;
-
-                      
-                       var distance2D1 = trans.gameObject.AddComponent<DistanceJoint2D>();
-                       distance2D1.autoConfigureDistance = false;
-                       distance2D1.connectedBody = transforms[(i + 1) * xCount + j].GetComponent<Rigidbody2D>();
-                       distance2D1.distance = size / 100f ;
-                       distance2D1.maxDistanceOnly = true; 
-                    }
-                    if (j < xCount - 1)
-                   {
-                       var distance2D = trans.gameObject.AddComponent<SpringJoint2D>();
-                       distance2D.autoConfigureDistance = false;
-                       distance2D.connectedBody = transforms[i * xCount + j + 1].GetComponent<Rigidbody2D>();
+                        var distance2D = trans.gameObject.AddComponent<SpringJoint2D>();
+                       // distance2D.autoConfigureDistance = false;
+                        distance2D.connectedBody = transforms[(i + 1) * xCount + j].GetComponent<Rigidbody2D>();
                         distance2D.dampingRatio = dampingRatio;
                         distance2D.distance = size / 100f;
+                        distance2D.frequency = frequency;
 
-                       
-                       var distance2D1 = trans.gameObject.AddComponent<DistanceJoint2D>();
-                       distance2D1.autoConfigureDistance = false;
-                       distance2D1.connectedBody = transforms[i * xCount + j + 1].GetComponent<Rigidbody2D>();
-                       distance2D1.distance = size / 100f;
-                       distance2D1.maxDistanceOnly = true;
-                      
+                        var distance2D1 = trans.gameObject.AddComponent<DistanceJoint2D>();
+                        //distance2D1.autoConfigureDistance = false;
+                        distance2D1.connectedBody = transforms[(i + 1) * xCount + j].GetComponent<Rigidbody2D>();
+                        distance2D1.distance = size / 100f;
+                        //distance2D1.maxDistanceOnly = true; 
                     }
+                    if (j < xCount - 1)
+                    {
+                        var distance2D = trans.gameObject.AddComponent<SpringJoint2D>();
+                        //distance2D.autoConfigureDistance = false;
+                        distance2D.connectedBody = transforms[i * xCount + j + 1].GetComponent<Rigidbody2D>();
+                        distance2D.dampingRatio = dampingRatio;
+                        distance2D.distance = size / 100f;
+                        distance2D.frequency = frequency;
+
+                        var distance2D1 = trans.gameObject.AddComponent<DistanceJoint2D>();
+                       // distance2D1.autoConfigureDistance = false;
+                        distance2D1.connectedBody = transforms[i * xCount + j + 1].GetComponent<Rigidbody2D>();
+                        distance2D1.distance = size / 100f;
+                        //distance2D1.maxDistanceOnly = true;
+                    }
+
+                    if (i < yCount - 1 && j < xCount - 1)
+                    {
+                        var distance2D = trans.gameObject.AddComponent<SpringJoint2D>();
+                        //distance2D.autoConfigureDistance = false;
+                        distance2D.connectedBody = transforms[(i + 1) * xCount + j + 1].GetComponent<Rigidbody2D>();
+                        distance2D.dampingRatio = dampingRatio;
+                        distance2D.distance = size / 100f;
+                        distance2D.frequency = frequency;
+                    }
+
+                    if (j > 0 && i < yCount - 1)
+                    {
+                        var distance2D = trans.gameObject.AddComponent<SpringJoint2D>();
+                        //distance2D.autoConfigureDistance = false;
+                        distance2D.connectedBody = transforms[(i + 1) * xCount + j - 1].GetComponent<Rigidbody2D>();
+                        distance2D.dampingRatio = dampingRatio;
+                        distance2D.distance = size / 100f;
+                        distance2D.frequency = frequency;
+                    }
+
+
                 }
             }
         }
