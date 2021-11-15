@@ -2,7 +2,7 @@ using BlueNoah;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CircleSoftBody : MonoBehaviour
+public class CircleSoftBody2 : MonoBehaviour
 {
     public class CircleSoft
     {
@@ -29,6 +29,7 @@ public class CircleSoftBody : MonoBehaviour
     }
 
     public bool load;
+    public Camera myCamera;
 
     #region physics
     public GameObject prefab;
@@ -39,26 +40,20 @@ public class CircleSoftBody : MonoBehaviour
     public float dampingRatio = 0;
     public float gravity = 1;
     public float mass = 1;
+    public float centerSize = 1;
     public Vector3 offset;
     List<GameObject> sprites = new List<GameObject>();
     #endregion
 
     #region mesh
     [SerializeField]
-    Texture2D texture2D;
+    Texture2D[] texture2D;
     GameObject meshGo;
-    int size = 30;
     public int sectorCount = 10 ;
-    int yCount;
     #endregion
 
     List<CircleSoft> circleSofts = new List<CircleSoft>();
 
-    void Start()
-    {
-       
-        CreateSoftBodyStructure();
-    }
     
     private void Update()
     {
@@ -71,12 +66,26 @@ public class CircleSoftBody : MonoBehaviour
         {
             item.Update();
         }
+        if (Input.GetMouseButtonDown(0))
+        {
+            //Input.mousePosition;
+            var pos = ScreenPositionToOrthograhicCameraPosition();
+            offset = new Vector3(pos.x, pos.y,0);
+            CreateSoftBodyStructure();
+        }
     }
 
+    Vector3 ScreenPositionToOrthograhicCameraPosition()
+    {
+        float sizePerPixel = myCamera.orthographicSize * 2 / Screen.height;
+        float x = (Input.mousePosition.x - Screen.width / 2) * sizePerPixel;
+        float y = (Input.mousePosition.y - Screen.height / 2) * sizePerPixel;
+        return myCamera.transform.position + myCamera.transform.up * y + myCamera.transform.right * x;
+    }
 
     void CreateSoftBodyStructure()
     {
-        meshGo = MeshUtility.CreateCircle(texture2D, count, radius);
+        meshGo = MeshUtility.CreateCircle(texture2D[Random.Range(0, texture2D.Length)], count, radius);
         meshGo.transform.position = offset;
 
         sprites = new List<GameObject>();
@@ -85,7 +94,7 @@ public class CircleSoftBody : MonoBehaviour
         center.GetComponent<Rigidbody2D>().mass = mass;
         center.transform.position = offset;
         center.transform.localScale = Vector3.one * prefabSize;
-
+        center.GetComponent<HingeJoint2D>().enabled = false;
         float degree = 360f / count;
         var relativePosition = new Vector3(0, radius);
         for (int i = 0; i < count; i++)
@@ -93,11 +102,21 @@ public class CircleSoftBody : MonoBehaviour
             relativePosition = Rotate(relativePosition, degree);
             sprites.Add(Instantiate(center, offset + relativePosition, Quaternion.identity));
         }
-
+        center.transform.localScale = Vector3.one * centerSize;
         for (int i = 0; i < count; i++)
         {
-            var springJoint = sprites[i].AddComponent<SpringJoint2D>();
             var hingeJoint = sprites[i].GetComponent<HingeJoint2D>();
+            if ((i - 1) < 0)
+            {
+                hingeJoint.connectedBody = sprites[(count - 1) % count].GetComponent<Rigidbody2D>();
+            }
+            else
+            {
+                hingeJoint.connectedBody = sprites[(i - 1) % count].GetComponent<Rigidbody2D>();
+            }
+            hingeJoint.enabled = true;
+            /*
+            var springJoint = sprites[i].AddComponent<SpringJoint2D>();
             springJoint.frequency = frequency;
             springJoint.dampingRatio = dampingRatio;
             springJoint.connectedBody = center.GetComponent<Rigidbody2D>();
@@ -108,13 +127,10 @@ public class CircleSoftBody : MonoBehaviour
             if ((i - 1) < 0)
             {
                 springJoint.connectedBody = sprites[(count - 1) % count].GetComponent<Rigidbody2D>();
-                //hingeJoint.connectedBody = sprites[(count - 1) % count].GetComponent<Rigidbody2D>();
-                hingeJoint.enabled = false;
             }
             else
             {
                 springJoint.connectedBody = sprites[(i - 1) % count].GetComponent<Rigidbody2D>();
-                hingeJoint.connectedBody = sprites[(i - 1) % count].GetComponent<Rigidbody2D>();
             }
 
             springJoint = sprites[i].AddComponent<SpringJoint2D>();
@@ -125,6 +141,7 @@ public class CircleSoftBody : MonoBehaviour
 
             var distanceJoint = sprites[i].AddComponent<DistanceJoint2D>();
             distanceJoint.connectedBody = sprites[(i + 1) % count].GetComponent<Rigidbody2D>();
+            */
         }
 
 

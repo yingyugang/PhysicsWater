@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6178457289412863165}
   - component: {fileID: 9140374666576943985}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: CircleC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,4 +147,4 @@ HingeJoint2D:
   m_UseLimits: 1
   m_AngleLimits:
     m_LowerAngle: 0
-    m_UpperAngle: 360
+    m_UpperAngle: 15

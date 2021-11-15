@@ -2,7 +2,7 @@ using BlueNoah;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CircleSoftBody : MonoBehaviour
+public class CircleSoftBody1 : MonoBehaviour
 {
     public class CircleSoft
     {
@@ -45,7 +45,7 @@ public class CircleSoftBody : MonoBehaviour
 
     #region mesh
     [SerializeField]
-    Texture2D texture2D;
+    Texture2D[] texture2D;
     GameObject meshGo;
     int size = 30;
     public int sectorCount = 10 ;
@@ -76,7 +76,7 @@ public class CircleSoftBody : MonoBehaviour
 
     void CreateSoftBodyStructure()
     {
-        meshGo = MeshUtility.CreateCircle(texture2D, count, radius);
+        meshGo = MeshUtility.CreateCircle(texture2D[Random.Range(0, texture2D.Length)], count, radius);
         meshGo.transform.position = offset;
 
         sprites = new List<GameObject>();
@@ -97,7 +97,6 @@ public class CircleSoftBody : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             var springJoint = sprites[i].AddComponent<SpringJoint2D>();
-            var hingeJoint = sprites[i].GetComponent<HingeJoint2D>();
             springJoint.frequency = frequency;
             springJoint.dampingRatio = dampingRatio;
             springJoint.connectedBody = center.GetComponent<Rigidbody2D>();
@@ -108,13 +107,10 @@ public class CircleSoftBody : MonoBehaviour
             if ((i - 1) < 0)
             {
                 springJoint.connectedBody = sprites[(count - 1) % count].GetComponent<Rigidbody2D>();
-                //hingeJoint.connectedBody = sprites[(count - 1) % count].GetComponent<Rigidbody2D>();
-                hingeJoint.enabled = false;
             }
             else
             {
                 springJoint.connectedBody = sprites[(i - 1) % count].GetComponent<Rigidbody2D>();
-                hingeJoint.connectedBody = sprites[(i - 1) % count].GetComponent<Rigidbody2D>();
             }
 
             springJoint = sprites[i].AddComponent<SpringJoint2D>();
@@ -125,6 +121,7 @@ public class CircleSoftBody : MonoBehaviour
 
             var distanceJoint = sprites[i].AddComponent<DistanceJoint2D>();
             distanceJoint.connectedBody = sprites[(i + 1) % count].GetComponent<Rigidbody2D>();
+            
         }
 
 
