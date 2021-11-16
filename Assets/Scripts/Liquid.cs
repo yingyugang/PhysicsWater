@@ -28,6 +28,15 @@ namespace BlueNoah
         [SerializeField]
         Button clear;
 
+
+
+        [SerializeField]
+        int countX = 20;
+        [SerializeField]
+        float scale = 0.5f;
+        [SerializeField]
+        float gravity = 0.5f;
+
         List<GameObject> sprites = new List<GameObject>();
         List<GameObject> spritesAll = new List<GameObject>();
         private void Awake()
@@ -88,15 +97,16 @@ namespace BlueNoah
 
         IEnumerator _Initialize1()
         {
-            var xCount = (int)(width / size);
-            var pixelPerSprite =(int)(texture2D.width / (width / size));
+            var pixelPerSprite =(int)(texture2D.width / countX);
+            var spriteSize = pixelPerSprite / 100f;
             int yCount = texture2D.height / pixelPerSprite;
             sprites = new List<GameObject>();
             for (int i = 0; i < yCount - 1; i++)
             {
-                for (int j = 0; j < xCount - 1; j++)
+                for (int j = 0; j < countX - 1; j++)
                 {
-                    var go = Instantiate(liquidPrefab, new Vector3(j - xCount / 2f, i - yCount / 2f, 0) * size + center.position, Quaternion.identity, liquidParent);
+                    var go = Instantiate(liquidPrefab, new Vector3(j - countX / 2f, i - yCount / 2f, 0) * spriteSize * scale + center.position, Quaternion.identity, liquidParent);
+                    go.transform.localScale = Vector3.one * scale;
                     var sprite = Sprite.Create(texture2D, new Rect(j * pixelPerSprite, i * pixelPerSprite, pixelPerSprite, pixelPerSprite), new Vector2(0.5f, 0.5f));
                     go.GetComponent<SpriteRenderer>().sprite = sprite;
                     go.layer = 0;
@@ -109,11 +119,11 @@ namespace BlueNoah
 
             for (int i = 0; i < yCount - 1; i++)
             {
-                for (int j = 0; j < xCount - 1; j++)
+                for (int j = 0; j < countX - 1; j++)
                 {
-                    var item = sprites[i * (xCount-1) + j];
+                    var item = sprites[i * (countX - 1) + j];
                     var rigid = item.GetComponent<Rigidbody2D>();
-                    rigid.gravityScale = 1;
+                    rigid.gravityScale = gravity;
                     rigid.mass = mass;
                     item.layer = 6;
                     mass += 0.01f;

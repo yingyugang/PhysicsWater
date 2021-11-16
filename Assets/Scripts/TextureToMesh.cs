@@ -6,7 +6,6 @@ namespace BlueNoah
     {
         [SerializeField]
         Texture2D texture2D;
-
         [SerializeField]
         GameObject prefab;
 
