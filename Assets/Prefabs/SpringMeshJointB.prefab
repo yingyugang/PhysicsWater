@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6178457289412863152}
   - component: {fileID: -4385585645331965055}
   m_Layer: 7
-  m_Name: SpringMeshJoint
+  m_Name: SpringMeshJointB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6178457289412863154}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1

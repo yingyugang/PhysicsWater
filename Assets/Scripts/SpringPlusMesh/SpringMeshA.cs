@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace BlueNoah 
 { 
-    public class SpringMesh : MonoBehaviour
+    public class SpringMeshA : MonoBehaviour
     {
 
         [SerializeField]
@@ -75,6 +75,7 @@ namespace BlueNoah
 
         void OnTouchEnd(EventData eventData)
         {
+            select.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
             select = null;
         }
 
@@ -106,6 +107,7 @@ namespace BlueNoah
             }
 
             float frequency = 3;
+            float dampingRatio =0f;
             //Ìí¼ÓDistanceJoint2D
             for (int i = 0; i < yCount; i++)
             {
@@ -119,6 +121,7 @@ namespace BlueNoah
                         // distance2D.autoConfigureDistance = false;
                         distance2D.connectedBody = jointTrans[(i + 1) * xCount + j].GetComponent<Rigidbody2D>();
                         distance2D.frequency = frequency;
+                        distance2D.dampingRatio = dampingRatio;
 
                         //var distance2D1 = trans.gameObject.AddComponent<DistanceJoint2D>();
                         //distance2D1.autoConfigureDistance = false;
@@ -131,7 +134,7 @@ namespace BlueNoah
                         //distance2D.autoConfigureDistance = false;
                         distance2D.connectedBody = jointTrans[i * xCount + j + 1].GetComponent<Rigidbody2D>();
                         distance2D.frequency = frequency;
-
+                        distance2D.dampingRatio = dampingRatio;
                         // var distance2D1 = trans.gameObject.AddComponent<DistanceJoint2D>();
                         // distance2D1.autoConfigureDistance = false;
                         // distance2D1.connectedBody = jointTrans[i * xCount + j + 1].GetComponent<Rigidbody2D>();
@@ -144,6 +147,7 @@ namespace BlueNoah
                         //distance2D.autoConfigureDistance = false;
                         distance2D.connectedBody = jointTrans[(i + 1) * xCount + j + 1].GetComponent<Rigidbody2D>();
                         distance2D.frequency = frequency;
+                        distance2D.dampingRatio = dampingRatio;
                     }
 
                     if (j > 0 && i < yCount - 1)
@@ -152,6 +156,12 @@ namespace BlueNoah
                         //distance2D.autoConfigureDistance = false;
                         distance2D.connectedBody = jointTrans[(i + 1) * xCount + j - 1].GetComponent<Rigidbody2D>();
                         distance2D.frequency = frequency;
+                        distance2D.dampingRatio = dampingRatio;
+                    }
+
+                    if (i == yCount - 1)
+                    {
+                        trans.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY ;
                     }
                 }
             }
@@ -166,6 +176,7 @@ namespace BlueNoah
                 //mesh.RecalculateBounds();
             }
             mesh.vertices = vertices;
+
         }
     }
 }

@@ -396,8 +396,8 @@ GameObject:
   - component: {fileID: 1805607290}
   - component: {fileID: 1805607289}
   - component: {fileID: 1805607288}
-  - component: {fileID: 1805607291}
   - component: {fileID: 1805607292}
+  - component: {fileID: 1805607293}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -471,22 +471,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1805607291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1805607287}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1af272784bce2384ca7dcfe81c62fd33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  texture2D: {fileID: 2800000, guid: 93d84a7aba165734eb52bbb0e249f567, type: 3}
-  prefab: {fileID: 6178457289412863154, guid: a6146d5f79faac84d97858fd29f9c11c, type: 3}
-  center: {fileID: 584190433}
-  myCamera: {fileID: 1805607289}
 --- !u!114 &1805607292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,3 +483,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b18897fc4e825425593ca450aec48894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1805607293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805607287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f8e43f1ed977b24f92d1ab0f9fa3269, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texture2D: {fileID: 2800000, guid: 93d84a7aba165734eb52bbb0e249f567, type: 3}
+  prefab: {fileID: 6178457289412863154, guid: 70ce62963ee7d8f4b8a22e79b8893af2, type: 3}
+  center: {fileID: 584190433}
+  myCamera: {fileID: 1805607289}
