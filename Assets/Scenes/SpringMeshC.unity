@@ -162,7 +162,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 584190432}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -492,10 +492,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1805607287}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a23131b91229423489519042d83822f1, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ee64ca2e1089564cbcf787f449161b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   texture2D: {fileID: 2800000, guid: 93d84a7aba165734eb52bbb0e249f567, type: 3}
-  prefab: {fileID: 6178457289412863154, guid: ef387665dc4914b4dacc6eec96712137, type: 3}
+  prefab: {fileID: 6178457289412863154, guid: 70ce62963ee7d8f4b8a22e79b8893af2, type: 3}
   center: {fileID: 584190433}
   myCamera: {fileID: 1805607289}
+  maxDistace: 1
+  inverse: 0

@@ -6,7 +6,7 @@ namespace BlueNoah
 { 
 
     //顺时针，逆时针判断顶点是否越界了，越界的话相应的顶点向移动方向移动。
-    public class SpringMeshB : MonoBehaviour
+    public class SpringMeshC : MonoBehaviour
     {
 
         class JointEntity
@@ -16,6 +16,7 @@ namespace BlueNoah
             public HashSet<JointEntity> connectJointEntities = new HashSet<JointEntity>();
             public int index;
             public int checkIndex;
+            public Vector3 originPos;
         }
 
 
@@ -29,7 +30,7 @@ namespace BlueNoah
         Camera myCamera;
 
         GameObject meshGo;
-        int pixelPerUnit = 20;
+        int pixelPerUnit = 10;
         int xCount;
         int yCount;
 
@@ -55,13 +56,14 @@ namespace BlueNoah
 
         Transform select;
         Vector3 selectOffset;
+        Vector2 originPos;
         void OnTouchBegin(EventData eventData)
         {
             //Physics2D.Raycast(new Vector2(camera.ScreenToWorldPoint(Input.mousePosition).x,camera.ScreenToWorldPoint(Input.mousePosition).y), Vector2.Zero, 0f);
             var pos = ScreenPositionToOrthograhicCameraPosition(eventData);
+            originPos = pos;
             float distance = 0.5f;
             var colls = Physics2D.OverlapCircleAll(pos, distance);
-
             foreach (var item in colls)
             {
                 var dis = Vector2.Distance(item.transform.position,pos);
@@ -76,30 +78,51 @@ namespace BlueNoah
                 selectOffset =  pos - select.position;
                 prePos = pos;
             }
-            foreach (var item in jointTrans)
-            {
-                var springJoints = item.GetComponents<SpringJoint2D>();
-                foreach (var joint2D in springJoints)
-                {
-                    joint2D.autoConfigureDistance = false;
-                }
-            }
         }
 
 
         Vector3 prePos;
+        public float maxDistace = 1f;
+        public bool inverse;
         void OnTouch(EventData eventData)
         {
             if (select != null)
             {
-                openList.Clear();
-                openIndex = 0;
                 var pos = ScreenPositionToOrthograhicCameraPosition(eventData);
-                JointEntity entity = jointDic[select];
-                jointEntities[entity.index].transform.position = pos - selectOffset - center.position;
+                var distance = ((Vector2)pos - originPos).magnitude;
+                if (pos.x < originPos.x)
+                {
+                    distance = -distance;
+                }
+                Vector2 originPos2D = originPos;
+                foreach (var item in jointEntities)
+                {
+                    if (  ((Vector2)item.transform.position - originPos2D).magnitude < maxDistace)
+                    {
+                        var distance1 = ((Vector2)item.originPos - originPos).magnitude;
+                        var inverseLerp = Mathf.InverseLerp( maxDistace, 0, (distance1 / maxDistace));
 
-                openList.Add(entity);
-                Extrusion(pos);
+                        var targetPos = item.originPos + (Vector3)((Vector2)item.originPos - originPos).normalized * distance * inverseLerp;
+                        var preTargetPos = item.transform.position;
+                        item.transform.position = targetPos;// *  distance / (item.transform.position - center.position).magnitude ;
+                        var entity = item;
+                        var connects = entity.connects;
+                        bool disvalidate = false;
+                        for (int i = 0; i < connects.Count; i++)
+                        {
+                            //三角形的Cross如何反了，变成逆时针的话说明顶点重复了。
+                            var cross = Vector3.Cross((jointEntities[connects[i][2]].transform.position - jointEntities[connects[i][0]].transform.position).normalized, (jointEntities[connects[i][1]].transform.position - jointEntities[connects[i][0]].transform.position).normalized);
+                            if (cross.z <= 0)
+                            {
+                                disvalidate = true;
+                            }
+                        }
+                        if (disvalidate)
+                        {
+                            item.transform.position = preTargetPos;
+                        }
+                    }
+                }
                 prePos = pos;
                 for (int i = 0; i < vertices.Length; i++)
                 {
@@ -110,64 +133,15 @@ namespace BlueNoah
             }
         }
 
-        List<JointEntity> openList = new List<JointEntity>();
-        int openIndex = 0;
-        int checkIndex = 0;
-        void Extrusion(Vector3 pos)
-        {
-            checkIndex++;
-            if (checkIndex == int.MaxValue)
-            {
-                checkIndex = 0;
-            }
-            while (openIndex < openList.Count)
-            {
-                JointEntity entity = openList[openIndex];
-                entity.checkIndex = checkIndex;
-                openIndex++;
-                var connects = entity.connects;
-                for (int i = 0; i < connects.Count; i++)
-                {
-                    //三角形的Cross如何反了，变成逆时针的话说明顶点重复了。
-                    var cross = Vector3.Cross((jointEntities[connects[i][2]].transform.position - jointEntities[connects[i][0]].transform.position).normalized, (jointEntities[connects[i][1]].transform.position - jointEntities[connects[i][0]].transform.position).normalized);
-                    if (cross.z <= 0)
-                    {
-                        if (connects[i][0] != entity.index)
-                        {
-                            if (jointEntities[connects[i][0]].checkIndex!=checkIndex)
-                            {
-                                jointEntities[connects[i][0]].transform.position += (pos - prePos);
-                                openList.Add(jointEntities[connects[i][0]]);
-                            }
-                        }
-                        if (connects[i][1] != entity.index)
-                        {
-                            if (jointEntities[connects[i][1]].checkIndex != checkIndex)
-                            {
-                                jointEntities[connects[i][1]].transform.position += (pos - prePos);
-                                openList.Add(jointEntities[connects[i][1]]);
-                            }
-                        }
-                        if (connects[i][2] != entity.index)
-                        {
-                            if (jointEntities[connects[i][2]].checkIndex != checkIndex)
-                            {
-                                jointEntities[connects[i][2]].transform.position += (pos - prePos);
-                                openList.Add(jointEntities[connects[i][2]]);
-                            }
-                        }
-                    }
-                }
-
-            }
-        }
-
-
         void OnTouchEnd(EventData eventData)
         {
             if (select != null)
             {
                 //select.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
+                foreach (var item in jointEntities)
+                {
+                    item.originPos = item.transform.position;
+                }
                 select = null;
             }
         }
@@ -201,6 +175,7 @@ namespace BlueNoah
                     jointEntities[index] = new JointEntity();
                     jointEntities[index].transform = jointTrans[index];
                     jointEntities[index].index = index;
+                    jointEntities[index].originPos = jointTrans[index].position;
                     jointDic.Add(jointTrans[index], jointEntities[index]);
                 }
             }

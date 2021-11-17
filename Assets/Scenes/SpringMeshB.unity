@@ -492,10 +492,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1805607287}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a23131b91229423489519042d83822f1, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f8e43f1ed977b24f92d1ab0f9fa3269, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   texture2D: {fileID: 2800000, guid: 93d84a7aba165734eb52bbb0e249f567, type: 3}
-  prefab: {fileID: 6178457289412863154, guid: ef387665dc4914b4dacc6eec96712137, type: 3}
+  prefab: {fileID: 6178457289412863154, guid: 1f9bf17ae2e839f46b36d8af07320052, type: 3}
   center: {fileID: 584190433}
   myCamera: {fileID: 1805607289}
