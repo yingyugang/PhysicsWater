@@ -4,5 +4,53 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: 529bb51f8e3b54d83aa9543b5f5d5a73
+  - enabled: 1
+    path: Assets/Scenes/SpringMeshC.unity
+    guid: 383ec1fc6846cb04d9d002e55f88da8a
+  - enabled: 1
+    path: Assets/Scenes/SpringMeshB.unity
+    guid: c00550025c09f2c418da8246f891c45f
+  - enabled: 1
+    path: Assets/Scenes/SpringMeshA.unity
+    guid: 87a374623235ea0438730c8e23733064
+  - enabled: 1
+    path: Assets/Scenes/SpringMesh.unity
+    guid: 4888c53b2b5f9cc449ee3246e0e05d87
+  - enabled: 1
+    path: Assets/Scenes/Metaball.unity
+    guid: 398489b2a69952d41a44a39ec8b6d883
+  - enabled: 1
+    path: Assets/Scenes/MainScene.unity
+    guid: 0c9eda6afbbae0d45b8fce337b71d879
+  - enabled: 1
+    path: Assets/Scenes/2DSoftbodyE.unity
+    guid: 2a282fa4ff1d2874c9a59273301c0df1
+  - enabled: 1
+    path: Assets/Scenes/2DSoftbodyD.unity
+    guid: 85578139dc171f148a256d639682f8d9
+  - enabled: 1
+    path: Assets/Scenes/2DSoftbodyC.unity
+    guid: aecd6600455e2dc4387d2c5c8d5a0313
+  - enabled: 1
+    path: Assets/Scenes/2DSoftbodyB.unity
+    guid: bf6d125472256a445bde51e1b19b3f7a
+  - enabled: 1
+    path: Assets/Scenes/2DSoftbodyA.unity
+    guid: 1212c75cc13e82449a9f4e15ea33447d
+  - enabled: 1
+    path: Assets/Scenes/2DSoftbody.unity
+    guid: 93ea58ab67a303443ba5335615d5512a
+  - enabled: 1
+    path: Assets/Scenes/2DLiquidA.unity
+    guid: 40c54c15e4bcc0243a2316d13bb7d00e
+  - enabled: 1
+    path: Assets/Scenes/2DLiquid.unity
+    guid: 54c8250c05b7aa64d8d17c4e11e35c10
+  - enabled: 1
+    path: Assets/Scenes/2DCloth.unity
+    guid: 51fb9fdabb2b73741baaa1b5e4288687
   m_configObjects: {}
