@@ -133,6 +133,12 @@ namespace BlueNoah
             }
         }
 
+        bool CheckClockWise(Vector3 point0,Vector3 point1,Vector3 point2)
+        {
+            var cross = Vector3.Cross(point2 - point0, point1 - point0);
+            return cross.z <= 0;
+        }
+
         void OnTouchEnd(EventData eventData)
         {
             if (select != null)

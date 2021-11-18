@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -214,7 +214,6 @@ GameObject:
   - component: {fileID: 698952046}
   - component: {fileID: 698952045}
   - component: {fileID: 698952044}
-  - component: {fileID: 698952047}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -288,18 +287,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &698952047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 698952043}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 439fdf13ce0a44576a9e6633d807e48c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &836818142
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,7 +305,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &836818143
 RectTransform:
   m_ObjectHideFlags: 0
@@ -335,9 +322,9 @@ RectTransform:
   m_Father: {fileID: 1983498152}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 80, y: -15}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &836818144
@@ -528,6 +515,7 @@ GameObject:
   - component: {fileID: 1208814689}
   - component: {fileID: 1208814688}
   - component: {fileID: 1208814687}
+  - component: {fileID: 1208814691}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -617,6 +605,38 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1208814691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208814686}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 439fdf13ce0a44576a9e6633d807e48c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 836818142}
+  prefabParent: {fileID: 1983498152}
+  sceneList:
+  - Main
+  - SpringMeshC
+  - SpringMeshB
+  - SpringMeshA
+  - SpringMesh
+  - Metaball
+  - MainScene
+  - 2DSoftbodyE
+  - 2DSoftbodyD
+  - 2DSoftbodyC
+  - 2DSoftbodyB
+  - 2DSoftbodyA
+  - 2DSoftbody
+  - 2DLiquidA
+  - 2DLiquid
+  - 2DCloth
+  load: 0
 --- !u!1 &1615129438
 GameObject:
   m_ObjectHideFlags: 0
@@ -694,6 +714,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1983498152}
   - component: {fileID: 1983498153}
+  - component: {fileID: 1983498154}
   m_Layer: 5
   m_Name: GameObject
   m_TagString: Untagged
@@ -720,7 +741,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 100, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1983498153
 MonoBehaviour:
@@ -731,7 +752,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1983498151}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
@@ -740,11 +761,23 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 200, y: 30}
+  m_Spacing: {x: 0, y: 40}
+  m_Constraint: 1
+  m_ConstraintCount: 1
+--- !u!114 &1983498154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983498151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
