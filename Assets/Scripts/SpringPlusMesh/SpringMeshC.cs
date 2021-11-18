@@ -201,11 +201,5 @@ namespace BlueNoah
                 jointEntities[triangles[i + 2]].connectJointEntities.Add(jointEntities[triangles[i + 1]]);
             }
         }
-
-
-        private void Update()
-        {
-           
-        }
     }
 }
