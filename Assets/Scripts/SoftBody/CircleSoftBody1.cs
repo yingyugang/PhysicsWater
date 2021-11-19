@@ -53,10 +53,10 @@ public class CircleSoftBody1 : MonoBehaviour
     #endregion
 
     List<CircleSoft> circleSofts = new List<CircleSoft>();
-
+    public Camera myCamera;
     void Start()
     {
-       
+        myCamera = Camera.main;
         CreateSoftBodyStructure();
     }
     
@@ -71,8 +71,21 @@ public class CircleSoftBody1 : MonoBehaviour
         {
             item.Update();
         }
+        if (Input.GetMouseButtonDown(0))
+        {
+            //Input.mousePosition;
+            var pos = ScreenPositionToOrthograhicCameraPosition();
+            offset = new Vector3(pos.x, pos.y, 0);
+            CreateSoftBodyStructure();
+        }
     }
-
+    Vector3 ScreenPositionToOrthograhicCameraPosition()
+    {
+        float sizePerPixel = myCamera.orthographicSize * 2 / Screen.height;
+        float x = (Input.mousePosition.x - Screen.width / 2) * sizePerPixel;
+        float y = (Input.mousePosition.y - Screen.height / 2) * sizePerPixel;
+        return myCamera.transform.position + myCamera.transform.up * y + myCamera.transform.right * x;
+    }
 
     void CreateSoftBodyStructure()
     {

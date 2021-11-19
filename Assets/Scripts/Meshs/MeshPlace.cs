@@ -14,34 +14,16 @@ public class MeshPlace : MonoBehaviour
 
     public List<Transform> cupList3;
 
-    private void Update()
+    private void Awake()
     {
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            InsertCat(cupList);
-        }
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            InsertCat(cupList1);
-        }
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            InsertCat(cupList2);
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            InsertCat(cupList3);
-        }
+        InsertCat(cupList);
+        InsertCat(cupList1);
+        InsertCat(cupList2);
+        InsertCat(cupList3);
     }
 
     void InsertCat(List<Transform> cupList)
     {
         var meshGo = MeshUtility.CreateMeshByTransforms(texture, cupList);
     }
-
-
-
-
-
-
 }

@@ -620,13 +620,9 @@ MonoBehaviour:
   prefab: {fileID: 836818142}
   prefabParent: {fileID: 1983498152}
   sceneList:
-  - Main
   - SpringMeshC
-  - SpringMeshB
   - SpringMeshA
   - SpringMesh
-  - Metaball
-  - MainScene
   - 2DSoftbodyE
   - 2DSoftbodyD
   - 2DSoftbodyC

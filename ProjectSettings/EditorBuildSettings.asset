@@ -12,9 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/SpringMeshC.unity
     guid: 383ec1fc6846cb04d9d002e55f88da8a
   - enabled: 1
-    path: Assets/Scenes/SpringMeshB.unity
-    guid: c00550025c09f2c418da8246f891c45f
-  - enabled: 1
     path: Assets/Scenes/SpringMeshA.unity
     guid: 87a374623235ea0438730c8e23733064
   - enabled: 1
