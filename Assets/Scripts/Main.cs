@@ -3,22 +3,37 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+[System.Serializable]
+public class SceneEntity
+{
+    public string sceneName;
+    public string displayName;
+}
 public class Main : MonoBehaviour
 {
     public GameObject prefab;
     public Transform prefabParent;
     public List<string> sceneList;
+    public List<SceneEntity> sceneEntities;
+
     public bool load;
 
     private void Awake()
     {
-        foreach (var item in sceneList)
+        foreach (var item in sceneEntities)
         {
             var go =  Instantiate(prefab, prefabParent);
             go.SetActive(true);
-            go.GetComponentInChildren<Text>().text = item;
+            if (!string.IsNullOrEmpty(item.displayName))
+            {
+                go.GetComponentInChildren<Text>().text = item.displayName;
+            }
+            else
+            {
+                go.GetComponentInChildren<Text>().text = item.sceneName;
+            }
             go.GetComponent<Button>().onClick.AddListener(()=> {
-                SceneManager.LoadScene(item);
+                SceneManager.LoadScene(item.sceneName);
             });
         }
     }
@@ -29,13 +44,12 @@ public class Main : MonoBehaviour
     {
         if (load)
         {
-            sceneList = new List<string>();
-            var scenes = UnityEditor.EditorBuildSettings.scenes;
-            foreach (var item in scenes)
+            sceneEntities = new List<SceneEntity>();
+            foreach (var item in sceneList)
             {
-                var scene = item.path.Replace(".unity", "");
-                scene = scene.Substring(scene.LastIndexOf("/") + 1)  ;
-                sceneList.Add(scene);
+                var entity = new SceneEntity();
+                entity.sceneName = item;
+                sceneEntities.Add(entity);
             }
             load = false;
         }

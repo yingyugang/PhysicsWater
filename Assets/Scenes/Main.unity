@@ -612,7 +612,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1208814686}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 439fdf13ce0a44576a9e6633d807e48c, type: 3}
   m_Name: 
@@ -632,6 +632,29 @@ MonoBehaviour:
   - 2DLiquidA
   - 2DLiquid
   - 2DCloth
+  sceneEntities:
+  - sceneName: SpringMeshC
+    displayName: BiGan
+  - sceneName: 2DSoftbodyE
+    displayName: Pickle
+  - sceneName: SpringMeshA
+    displayName: SpringMagicA
+  - sceneName: SpringMesh
+    displayName: SpringMagicB
+  - sceneName: 2DSoftbodyD
+    displayName: Ant nest
+  - sceneName: 2DSoftbody
+    displayName: JellyA
+  - sceneName: 2DSoftbodyA
+    displayName: JellyB
+  - sceneName: 2DSoftbodyB
+    displayName: JellyC
+  - sceneName: 2DLiquidA
+    displayName: Jar
+  - sceneName: 2DLiquid
+    displayName: Sauce
+  - sceneName: 2DCloth
+    displayName: Cloth
   load: 0
 --- !u!1 &1615129438
 GameObject:

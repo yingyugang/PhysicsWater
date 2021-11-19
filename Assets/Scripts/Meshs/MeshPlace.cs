@@ -1,4 +1,5 @@
 using BlueNoah;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,14 +17,23 @@ public class MeshPlace : MonoBehaviour
 
     private void Awake()
     {
-        InsertCat(cupList);
-        InsertCat(cupList1);
-        InsertCat(cupList2);
-        InsertCat(cupList3);
+        StartCoroutine(InsertCats());
     }
 
     void InsertCat(List<Transform> cupList)
     {
         var meshGo = MeshUtility.CreateMeshByTransforms(texture, cupList);
+    }
+
+    IEnumerator InsertCats()
+    {
+        yield return new WaitForSeconds(0.5f);
+        InsertCat(cupList);
+        yield return new WaitForSeconds(0.5f);
+        InsertCat(cupList1);
+        yield return new WaitForSeconds(0.5f);
+        InsertCat(cupList2);
+        yield return new WaitForSeconds(0.5f);
+        InsertCat(cupList3);
     }
 }
